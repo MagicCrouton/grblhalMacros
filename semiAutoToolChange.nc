@@ -2,7 +2,7 @@
 ; this is useful when you have milled away the original position a touch probe was placed.
 ; this is important! this is for changing tools after you run your first OP with work coordinates already set.
 
-; Set the probing feed rates (adjust as needed these don't need to be here in this macro these can be adjusted in firmware)
+; Set the probing feed rates
 $110=1000  ; Fast probing speed
 $111=100    ; Slow touch-off speed
 $112=20     ; Example maximum travel limit in mm
