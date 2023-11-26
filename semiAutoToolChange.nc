@@ -1,15 +1,17 @@
-; GRBLHAL-compatible macro for probing existing and new tools with two-step touch-off
+; GRBLHAL-compatible macro for probing on a tool setter separate from the workpiece. 
+; this is useful when you have milled away the original position a touch probe was placed.
+; this is important! this is for changing tools after you run your first OP with work coordinates already set.
 
 ; Set the probing feed rates (adjust as needed these don't need to be here in this macro these can be adjusted in firmware)
 $110=1000  ; Fast probing speed
 $111=100    ; Slow touch-off speed
 $112=20     ; Example maximum travel limit in mm
 
-; Move to tool change location (adjust coordinates)
-G0 X100 Y100 Z10 ; Example coordinates 
 
-; Move to the predefined tool setter location (adjust coordinates here and on line 56)
+; Move to the predefined tool setter location (adjust coordinates line 14 and line 64)
 G0 X50 Y50 Z10 ; Example coordinates for the tool setter location
+
+M0 ; Pause for manually lowering tool closer to the setter
 
 ; First step of probing current tool - Fast initial probe
 G38.2 Z-10 F$110 ; Probe towards negative Z direction at the fast speed
@@ -57,6 +59,11 @@ G0 X50 Y50 Z10 ; Example coordinates for the tool setter location
 
 ; Ask for manual tool change
 M0 ; Pause for manual tool change
+
+; Move to the predefined tool setter location (adjust coordinates)
+G0 X50 Y50 Z10 ; Example coordinates for the tool setter location
+
+M0 ; Pause for manually lowering tool closer to the setter
 
 ; First step of probing for the new tool - Fast initial probe
 G38.2 Z-10 F$110 ; Probe towards negative Z direction at the fast speed
