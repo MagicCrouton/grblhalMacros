@@ -9,6 +9,8 @@ function semiAutoToolChange(fastPrbSpd,slowPrbSpd,maxTravel,toolStrLocal,toolChn
     var step = 0;
     var initialZOffset = 0;
     socket.off('status');
+    socket.off('prbResult');
+
     socket.on(`status`, function(status){
       console.log(status);
       initialZOffset=status.machine.position.offset.z;
@@ -17,14 +19,12 @@ function semiAutoToolChange(fastPrbSpd,slowPrbSpd,maxTravel,toolStrLocal,toolChn
     // socket.off('status');
   
     var step1 = `
-    ; Header
-  
-    ${toolStrLocal} ; Example coordinates for the tool setter location
+        ; Header
 
-    M0 ; Pause for manually lowering tool closer to the setter` // find right side of circle
+        G21 ; mm mode` 
   
     socket.emit('runJob', {
-      data: holefindermacroStep1,
+      data: step1,
 
       isJob: false,
       completedMsg: false,
@@ -41,9 +41,9 @@ function semiAutoToolChange(fastPrbSpd,slowPrbSpd,maxTravel,toolStrLocal,toolChn
         if (step == 1) {
   
           var holefindermacroStep5 = `
-          G4 P0.3
-          G91
-          G0 X-1
+          ${toolStrLocal}
+          M0
+          G38.2 Z-10 F${fastPrbSpd} ; Probe towards negative Z direction at the fast speed
           G90
           G38.2 X-` + approxCircleDia / 2 + ` F` + probeFeed + ` ; Probe X` // find left side of circle
   
