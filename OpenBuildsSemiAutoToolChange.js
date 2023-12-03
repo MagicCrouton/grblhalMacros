@@ -1,8 +1,8 @@
     const fastPrbSpd = 500;
     const slowPrbSpd = 100;
     const maxTravel = 20;
-    const toolStrLocal = `G0 X-700 Y-700 Z-50` // Location of the tool setter, this must be at a safe height for any tool you might have.
-    const toolChngLocal = `G0 X-600 Y-600 Z-50` // Location that you will perform the manual tool change. It can be same location as the tool setter.
+    const toolStrLocal = `G53 G0 X-806 Y-842 Z-20` // GCode to move to Tool Setter Location
+    const toolChngLocal = `G53 G0 X-806 Y-842 Z-20` // Gcode to Move to Tool Change Location It can be the same location 
     
 function semiAutoToolChange(fastPrbSpd,slowPrbSpd,maxTravel,toolStrLocal,toolChngLocal) {
 

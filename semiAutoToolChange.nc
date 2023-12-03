@@ -1,4 +1,7 @@
-; GRBLHAL-compatible macro for probing on a tool setter separate from the workpiece. 
+; GRBLHAL-compatible macro for probing on a tool setter separate from the workpiece.
+
+; IMPORTANT! this code is more of a pseudocode for the JS macro in this repo
+
 ; this is useful when you have milled away the original position a touch probe was placed.
 ; this is important! this is for changing tools after you run your first OP with work coordinates already set.
 
